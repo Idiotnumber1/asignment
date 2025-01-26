@@ -1,0 +1,14 @@
+C:\Users\tangb\Downloads\PRG2 Assignment 2\obj\Debug\net8.0\PRG2 Assignment 2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tangb\Downloads\PRG2 Assignment 2\obj\Debug\net8.0\PRG2 Assignment 2.AssemblyInfoInputs.cache
+C:\Users\tangb\Downloads\PRG2 Assignment 2\obj\Debug\net8.0\PRG2 Assignment 2.AssemblyInfo.cs
+C:\Users\tangb\Downloads\PRG2 Assignment 2\obj\Debug\net8.0\PRG2 Assignment 2.csproj.CoreCompileInputs.cache
+C:\Users\tangb\Downloads\PRG2 Assignment 2\bin\Debug\net8.0\PRG2 Assignment 2.exe
+C:\Users\tangb\Downloads\PRG2 Assignment 2\bin\Debug\net8.0\PRG2 Assignment 2.deps.json
+C:\Users\tangb\Downloads\PRG2 Assignment 2\bin\Debug\net8.0\PRG2 Assignment 2.runtimeconfig.json
+C:\Users\tangb\Downloads\PRG2 Assignment 2\bin\Debug\net8.0\PRG2 Assignment 2.dll
+C:\Users\tangb\Downloads\PRG2 Assignment 2\bin\Debug\net8.0\PRG2 Assignment 2.pdb
+C:\Users\tangb\Downloads\PRG2 Assignment 2\obj\Debug\net8.0\PRG2 Assignment 2.dll
+C:\Users\tangb\Downloads\PRG2 Assignment 2\obj\Debug\net8.0\refint\PRG2 Assignment 2.dll
+C:\Users\tangb\Downloads\PRG2 Assignment 2\obj\Debug\net8.0\PRG2 Assignment 2.pdb
+C:\Users\tangb\Downloads\PRG2 Assignment 2\obj\Debug\net8.0\PRG2 Assignment 2.genruntimeconfig.cache
+C:\Users\tangb\Downloads\PRG2 Assignment 2\obj\Debug\net8.0\ref\PRG2 Assignment 2.dll
