@@ -99,7 +99,9 @@ class Program
 
     static void AssignBoardingGate(Terminal terminal)
     {
-        Console.Write("Enter Flight Number: ");
+        Console.WriteLine("=============================================");
+        Console.WriteLine("Assign a Boarding Gate to a Flight");
+        Console.WriteLine("=============================================");
         string? flightNumber = Console.ReadLine();
 
         Flight? flight = null;
@@ -142,7 +144,9 @@ class Program
 
     static void CreateFlight(Terminal terminal)
     {
-        Console.Write("Enter Flight Number: ");
+        Console.WriteLine("=============================================");
+        Console.WriteLine("Create Flight");
+        Console.WriteLine("=============================================");
         string? flightNumber = Console.ReadLine();
 
         Console.Write("Enter Origin: ");
@@ -196,7 +200,9 @@ class Program
 
     static void DisplayAirlineFlights(Terminal terminal)
     {
-        Console.WriteLine("List of Airlines:");
+        Console.WriteLine("=============================================");
+        Console.WriteLine("List of Airlines for Changi Airport Terminal 5");
+        Console.WriteLine("=============================================");
         foreach (var airline in terminal.Airlines.Values)
         {
             Console.WriteLine($"{airline.Code} - {airline.Name}");
