@@ -1,4 +1,4 @@
-﻿//==========================================================
+//==========================================================
 // Student Number : S10267191
 // Student Name   : Bertrand Tang
 // Partner Name   : Liu Yi Yang
@@ -13,7 +13,7 @@ class Program
     static void Main(string[] args)
     {
         Terminal terminal = new Terminal { TerminalName = "Changi Airport Terminal 5" };
-        terminal.LoadFiles("airlines.csv", "boardinggates.csv");
+        terminal.LoadFiles("airlines.csv", "boardinggates.csv", "flights.csv");
 
         Console.WriteLine("=============================================");
         Console.WriteLine($"Welcome to {terminal.TerminalName}");
@@ -253,7 +253,7 @@ public class Terminal
         return false;
     }
 
-    public void LoadFiles(string airlinesFile, string boardingGatesFile)
+    public void LoadFiles(string airlinesFile, string boardingGatesFile, string flightsFile)
     {
         try
         {
@@ -274,20 +274,61 @@ public class Terminal
                 var parts = line.Split(',');
                 if (parts.Length == 4)
                 {
-                    bool supportsCFFT = bool.TryParse(parts[1], out bool cfft);
-                    bool supportsDDJB = bool.TryParse(parts[2], out bool ddjb);
-                    bool supportsLWTT = bool.TryParse(parts[3], out bool lwtt);
+                    bool.TryParse(parts[1], out bool supportsCFFT);
+                    bool.TryParse(parts[2], out bool supportsDDJB);
+                    bool.TryParse(parts[3], out bool supportsLWTT);
 
-                    if (supportsCFFT && supportsDDJB && supportsLWTT)
+                    BoardingGate gate = new BoardingGate
                     {
-                        BoardingGate gate = new BoardingGate
-                        {
-                            GateName = parts[0],
-                            SupportsCFFT = cfft,
-                            SupportsDDJB = ddjb,
-                            SupportsLWTT = lwtt
-                        };
-                        AddBoardingGate(gate);
+                        GateName = parts[0],
+                        SupportsCFFT = supportsCFFT,
+                        SupportsDDJB = supportsDDJB,
+                        SupportsLWTT = supportsLWTT
+                    };
+                    AddBoardingGate(gate);
+                }
+            }
+
+            // Load flights.csv
+            foreach (var line in File.ReadAllLines(flightsFile))
+            {
+                var parts = line.Split(',');
+                if (parts.Length >= 5)
+                {
+                    string flightNumber = parts[0];
+                    string origin = parts[1];
+                    string destination = parts[2];
+                    DateTime expectedTime = DateTime.Parse(parts[3]);
+                    string status = "Scheduled";
+                    string requestCode = parts.Length > 4 ? parts[4] : "";
+
+                    // Determine flight type based on requestCode
+                    Flight flight;
+                    switch (requestCode)
+                    {
+                        case "CFFT":
+                            flight = new CFFTFlight { FlightNumber = flightNumber, Origin = origin, Destination = destination, ExpectedTime = expectedTime, Status = status };
+                            break;
+                        case "DDJB":
+                            flight = new DDJBFlight { FlightNumber = flightNumber, Origin = origin, Destination = destination, ExpectedTime = expectedTime, Status = status };
+                            break;
+                        case "LWTT":
+                            flight = new LWTTFlight { FlightNumber = flightNumber, Origin = origin, Destination = destination, ExpectedTime = expectedTime, Status = status };
+                            break;
+                        default:
+                            flight = new NORMFlight { FlightNumber = flightNumber, Origin = origin, Destination = destination, ExpectedTime = expectedTime, Status = status };
+                            break;
+                    }
+
+                    // Assign the flight to the correct airline if airline code exists
+                    string airlineCode = parts.Length > 5 ? parts[5] : null;
+                    if (airlineCode != null && Airlines.TryGetValue(airlineCode, out var airline))
+                    {
+                        airline.AddFlight(flight);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Warning: Airline code {airlineCode} for flight {flightNumber} does not exist.");
                     }
                 }
             }
@@ -297,6 +338,7 @@ public class Terminal
             Console.WriteLine($"Error loading files: {ex.Message}");
         }
     }
+
 
     public Airline? GetAirlineFromFlight(Flight flight)
     {
@@ -393,4 +435,3 @@ public class BoardingGate
 
     public double CalculateFees() => Flight?.CalculateFees() ?? 0.0;
 }
-
