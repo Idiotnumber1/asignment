@@ -26,12 +26,18 @@ namespace PRG2_Assignment_2
                 SupportsLWTT = supportsLWTT;
                 Flight = flight;
             }
+
             public double CalculateFees() => Flight?.CalculateFees() ?? 0.0;
             public string GetGateName() => GateName;
             public bool GetSupportsCFFT() => SupportsCFFT;
             public bool GetSupportsDDJB() => SupportsDDJB;
             public bool GetSupportsLWTT() => SupportsLWTT;
             public Flight? GetAssignedFlight() => Flight;
+            public void SetAssignedFlight(Flight flight)
+            {
+                this.Flight = flight;
+            }
+
             public override string ToString()
             {
                 return $"Gate Name: {GateName}, Supports CFFT: {SupportsCFFT}, Supports DDJB: {SupportsDDJB}, Supports LWTT: {SupportsLWTT}, Assigned Flight: {Flight?.GetFlightNumber() ?? "None"}";
